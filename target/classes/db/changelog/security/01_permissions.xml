@@ -1,6 +1,11 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet author="Alander" id="ala_001">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="PERMISSIONS"/>
+            </not>
+        </preConditions>
         <createTable remarks="Права" tableName="PERMISSIONS">
             <column name="ID" type="INT">
                 <constraints nullable="false"/>
@@ -8,6 +13,6 @@
             <column name="CODE" remarks="Код" type="VARCHAR(32)"/>
             <column name="NAME" remarks="Название" type="VARCHAR(100)"/>
         </createTable>
-        <addPrimaryKey columnNames="id" constraintName="permissions_pk" tableName="permissions"/>
+        <addPrimaryKey columnNames="ID" constraintName="PERMISSIONS_PK" tableName="PERMISSIONS"/>
     </changeSet>
 </databaseChangeLog>
