@@ -9,26 +9,22 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ROLES")
-class Role {
+@Table(name = "USERS")
+public class User {
     
     @Id
     private int id;
-    
+
     @Column(name = "code")
     private String code;
-    
+
     @Column(name = "name")
     private String name;
     
     @ManyToMany
-    private Set<User> users;
-    
-    @ManyToMany
-    private Set<Permission> permissions;
-    
+    private Set<Role> roles;
 
-    /**
+	/**
 	 * @return the id
 	 */
 	public int getId() {
@@ -69,38 +65,19 @@ class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	/**
-	 * @return the users
-	 */
-	public Set<User> getUsers (){
-	    return users;
-	}
-	
-	/**
-	 * @param set of users
-	 */
-	public void setUsers(Set<User> users) {
-	    this.users = users;
-	}
-	
 
 	/**
-	 * @return the permissions
+	 * @return the roles
 	 */
-	public Set<Permission> getPermissions() {
-		return permissions;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
 	/**
-	 * @param permissions the permissions to set
+	 * @param roles the roles to set
 	 */
-	public void setPermissions(Set<Permission> permissions) {
-		this.permissions = permissions;
-	}
-
-
-    
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	} 
     
 }
