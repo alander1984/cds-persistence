@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="ROLES")
-class Role {
+public class Role {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "roles_seq")

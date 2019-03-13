@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERMISSIONS")
-class Permission {
+public class Permission {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "permissions_seq")
