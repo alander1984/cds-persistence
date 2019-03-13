@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="RomanSergienko" id="rserg_005">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ROLES_PERMISSIONS"/>
+            </not>
+        </preConditions>
+        <createTable remarks="Связь ролей с правами" tableName="ROLES_PERMISSIONS">
+            <column name="ROLE_ID" remarks="ИД роли" type="INT"/>
+            <column name="PERMISSION_ID" remarks="ИД права" type="INT"/>
+        </createTable>
+        <addPrimaryKey columnNames="ROLE_ID,PERMISSION_ID" constraintName="PK_ROLES_PERMISSIONS" tableName="ROLES_PERMISSIONS"/>
+        <addForeignKeyConstraint baseColumnNames="ROLE_ID"
+                                 baseTableName="ROLES_PERMISSIONS"
+                                 constraintName="FK_ROLES_PERMISSIONS_ROLE_ID"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="ROLES"/>
+        <addForeignKeyConstraint baseColumnNames="PERMISSION_ID"
+                                 baseTableName="ROLES_PERMISSIONS"
+                                 constraintName="FK_ROLES_PERMISSIONS_PERMISSION_ID"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="PERMISSIONS"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="RomanSergienko" id="rserg_004">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="USERS_ROLES"/>
+            </not>
+        </preConditions>
+        <createTable remarks="Связь пользователей с ролями" tableName="USERS_ROLES">
+            <column name="USER_ID" remarks="ИД пользователя" type="INT"/>
+            <column name="ROLE_ID" remarks="ИД роли" type="INT"/>
+        </createTable>
+        <addPrimaryKey columnNames="USER_ID,ROLE_ID" constraintName="PK_USERS_ROLES" tableName="USERS_ROLES"/>
+        <addForeignKeyConstraint baseColumnNames="USER_ID"
+                                 baseTableName="USERS_ROLES"
+                                 constraintName="FK_USERS_ROLES_USER_ID"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="USERS"/>
+        <addForeignKeyConstraint baseColumnNames="ROLE_ID"
+                                 baseTableName="USERS_ROLES"
+                                 constraintName="FK_USERS_ROLES_ROLE_ID"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="ROLES"/>
+    </changeSet>
+</databaseChangeLog>

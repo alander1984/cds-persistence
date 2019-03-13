@@ -2,26 +2,30 @@ package tech.lmru.entity;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USERS")
 public class User {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "users_seq")
+    @SequenceGenerator(
+            name="users_seq",
+            sequenceName="users_sequence",
+            allocationSize = 1)
     private int id;
 
-    @Column(name = "code")
+    @Column(name = "CODE")
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "USERS_ROLES",
+        joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
+        inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
     private Set<Role> roles;
 
 	/**

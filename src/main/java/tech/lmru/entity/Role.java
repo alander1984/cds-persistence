@@ -2,17 +2,18 @@ package tech.lmru.entity;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="ROLES")
 class Role {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "roles_seq")
+    @SequenceGenerator(
+            name="roles_seq",
+            sequenceName="roles_sequence",
+            allocationSize = 1)
     private int id;
     
     @Column(name = "code")
@@ -21,10 +22,13 @@ class Role {
     @Column(name = "name")
     private String name;
     
-    @ManyToMany
+    @ManyToMany (mappedBy = "roles")
     private Set<User> users;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "ROLES_PERMISSIONS",
+        joinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"),
+        inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID"))
     private Set<Permission> permissions;
     
 
