@@ -29,7 +29,7 @@ public class Permission {
     @Column(name = "name")
     private String name;
     
-    @ManyToMany (mappedBy = "permissoins")
+    @ManyToMany (mappedBy = "permissions")
     private Set<Role> roles;
 
 	/**

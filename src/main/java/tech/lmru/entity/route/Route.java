@@ -6,6 +6,9 @@ import javax.persistence.*;
 @Table(name="ROUTES")
 public class Route {
     
+    @Id
+    private int id;
+    
     @Column(name = "code")
     private String code;
 
@@ -21,6 +24,20 @@ public class Route {
 	 */
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
     
