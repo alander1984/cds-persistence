@@ -7,5 +7,6 @@ import tech.lmru.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    
+
+    User findByCode(String code);
 }
