@@ -22,7 +22,7 @@ public class User {
     @Column(name = "NAME")
     private String name;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_ROLES",
         joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
         inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
@@ -82,6 +82,8 @@ public class User {
 	 */
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	} 
-    
+	}
+
+	public User() {
+	}
 }

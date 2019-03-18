@@ -1,20 +1,17 @@
 package tech.lmru.entity;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERMISSIONS")
 public class Permission {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "permissions_seq")
     @SequenceGenerator(
@@ -28,9 +25,7 @@ public class Permission {
 
     @Column(name = "name")
     private String name;
-    
-    @ManyToMany (mappedBy = "permissions")
-    private Set<Role> roles;
+
 
 	/**
 	 * @return the id
@@ -74,18 +69,6 @@ public class Permission {
 		this.name = name;
 	}
 
-	/**
-	 * @return the roles
-	 */
-	public Set<Role> getRoles() {
-		return roles;
+	public Permission() {
 	}
-
-	/**
-	 * @param roles the roles to set
-	 */
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 }
