@@ -1,8 +1,10 @@
 package tech.lmru.entity;
 
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "USERS")
@@ -19,8 +21,13 @@ public class User {
     @Column(name = "CODE")
     private String code;
 
+    @NonNull
     @Column(name = "NAME")
     private String name;
+
+    @NonNull
+    @Column(name = "PASSWORD")
+    private String password;
     
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_ROLES",
@@ -85,5 +92,34 @@ public class User {
 	}
 
 	public User() {
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		User user = (User) o;
+		return id == user.id &&
+				Objects.equals(code, user.code) &&
+				name.equals(user.name) &&
+				password.equals(user.password) &&
+				Objects.equals(roles, user.roles);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, code, name, password, roles);
 	}
 }

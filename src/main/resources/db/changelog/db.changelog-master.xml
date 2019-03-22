@@ -10,5 +10,5 @@
     <include file="db/changelog/security/04_sequences.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/security/05_users_roles.xml" relativeToChangelogFile="false"/>
     <include file="db/changelog/security/06_roles_permissions.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/security/07_users_add_password.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>
-
