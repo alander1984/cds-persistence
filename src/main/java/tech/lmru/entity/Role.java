@@ -1,5 +1,6 @@
 package tech.lmru.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Objects;
@@ -24,11 +25,11 @@ public class Role {
     private String name;
     
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "ROLES_PERMISSIONS",
         joinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"),
         inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID"))
-    private List<Permission> permissions;
+    private List<Permission> permissions = new ArrayList<>();
     
 
     /**

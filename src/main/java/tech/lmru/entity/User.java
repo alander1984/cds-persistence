@@ -1,5 +1,6 @@
 package tech.lmru.entity;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,11 +30,11 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
     
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "USERS_ROLES",
         joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
         inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
 	/**
 	 * @return the id
