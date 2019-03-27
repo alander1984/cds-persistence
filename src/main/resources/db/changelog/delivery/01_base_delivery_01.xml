@@ -1,0 +1,66 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Alander" id="ala_003_delivery_create">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="DELIVERY"/>
+            </not>
+        </preConditions>
+        <createTable remarks="Доставки" tableName="DELIVERY">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_user_id" type="INT"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="update_user_id" type="INT"/>
+            <column name="update_date" type="timestamp"/>
+            <column name="status" type="VARCHAR(64)"/>
+            <column name="delivery_date_min" type="timestamp"/>
+            <column name="delivery_date_max" type="timestamp"/>
+            <column name="comment" type="VARCHAR(512)"/>
+        </createTable>
+        <addPrimaryKey columnNames="ID" constraintName="DELIVERY_PK" tableName="DELIVERY"/>
+        <createSequence sequenceName="delivery_sequence" startValue="1" incrementBy="1"/>
+        <addForeignKeyConstraint baseColumnNames="CREATE_USER_ID"
+                                 baseTableName="DELIVERY"
+                                 constraintName="FK_DELIVERY_CREATEUSER"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="USERS"/>
+        <addForeignKeyConstraint baseColumnNames="UPDATE_USER_ID"
+                                 baseTableName="DELIVERY"
+                                 constraintName="FK_DELIVERY_UPDATEUSER"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="USERS"/>
+        <createTable remarks="Позиции доствавки" tableName="DELIVERY_ITEM">                         
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivery_id" type="BIGINT"/>
+            <column name="product_lm_code" type="VARCHAR(64)"/>
+            <column name="product_lm_name" type="VARCHAR(1024)"/>
+            <column name="weight" type="NUMERIC"/>    
+            <column name="width" type="NUMERIC"/>    
+            <column name="length" type="NUMERIC"/>    
+            <column name="quantity" type="NUMERIC"/>    
+            <column name="loadedQuantity" type="NUMERIC"/>    
+            <column name="approvedQuantity" type="NUMERIC"/>    
+            <column name="status" type="VARCHAR(64)"/>    
+        </createTable>
+        <addPrimaryKey columnNames="ID" constraintName="DELIVERY_ITEM_PK" tableName="DELIVERY_ITEM"/>
+        <createSequence sequenceName="delivery_item_sequence" startValue="1" incrementBy="1"/>
+        <addForeignKeyConstraint baseColumnNames="DELIVERY_ID"
+                                 baseTableName="DELIVERY_ITEM"
+                                 constraintName="FK_DELIVERY_ITEM_DELIVERY"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="DELIVERY"/>    
+    </changeSet>
+</databaseChangeLog>
