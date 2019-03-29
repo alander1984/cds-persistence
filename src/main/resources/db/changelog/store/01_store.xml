@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="YKorzhev" id="yk_001_store_create_store">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="STORE"/>
+            </not>
+        </preConditions>
+        <createTable remarks="Магазины" tableName="STORE">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" remarks="Код" type="VARCHAR(32)"/>
+            <column name="store_name" remarks="Название магазина" type="VARCHAR(500)" />
+            <column name="address" remarks="Адрес магазина" type="VARCHAR(500)" />
+            <column name="type" remarks="Тип магазина" type="VARCHAR(20)" />
+            <column name="lon" remarks="Долгота" type="NUMERIC" />
+            <column name="lat" remarks="Широта" type="NUMERIC" />
+            <column name="comment" remarks="Комментарий" type="VARCHAR(500)" />
+        </createTable>
+        <addPrimaryKey columnNames="ID" constraintName="STORE_PK" tableName="STORE"/>
+        <createSequence sequenceName="store_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+</databaseChangeLog>
