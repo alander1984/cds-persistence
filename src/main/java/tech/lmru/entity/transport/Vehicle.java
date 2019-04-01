@@ -17,13 +17,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TRANSPORT")
-public class Transport {
+@Table(name = "VEHICLE")
+public class Vehicle {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transport_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "vehicle_seq")
     @SequenceGenerator(
-            name="transport_seq",
-            sequenceName="transport_sequence",
+            name="vehicle_seq",
+            sequenceName="vehicle_sequence",
             allocationSize = 1)
     private long id;
     
@@ -39,12 +39,12 @@ public class Transport {
     @Column(name = "capacity")
     private String capacity;
     
-    @ManyToMany(mappedBy = "transports")
+    @ManyToMany(mappedBy = "vehicles")
     private Set<Driver> drivers = new HashSet<>();
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "transport_id")
-    private Transport transport; 
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
 
 	/**
 	 * @return the id
@@ -131,17 +131,17 @@ public class Transport {
 	}
 
 	/**
-	 * @return the transport
+	 * @return the vehicle
 	 */
-	public Transport getTransport() {
-		return transport;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
 
 	/**
-	 * @param transport the transport to set
+	 * @param vehicle the vehicle to set
 	 */
-	public void setTransport(Transport transport) {
-		this.transport = transport;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
     
     

@@ -1,6 +1,6 @@
 package tech.lmru.entity.transport;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +27,7 @@ public class Driver {
     private String patronymic;
     
     @Column(name = "birthday")
-    private LocalDate birthday;
+    private LocalDateTime birthday;
     
     @Column(name = "login")
     private String login;
@@ -36,10 +36,10 @@ public class Driver {
     private String password;
     
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "DRIVER_TRANSPORT",
+    @JoinTable(name = "DRIVER_VEHICLE",
         joinColumns = @JoinColumn(name = "driver_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "transport_id", referencedColumnName = "id"))
-    private Set<Transport> transports = new HashSet<>();
+        inverseJoinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"))
+    private Set<Vehicle> vehicles = new HashSet<>();
 
 	/**
 	 * @return the id
@@ -100,14 +100,14 @@ public class Driver {
 	/**
 	 * @return the birthday
 	 */
-	public LocalDate getBirthday() {
+	public LocalDateTime getBirthday() {
 		return birthday;
 	}
 
 	/**
 	 * @param birthday the birthday to set
 	 */
-	public void setBirthday(LocalDate birthday) {
+	public void setBirthday(LocalDateTime birthday) {
 		this.birthday = birthday;
 	}
 
@@ -140,17 +140,17 @@ public class Driver {
 	}
 
 	/**
-	 * @return the transports
+	 * @return the vehicles
 	 */
-	public Set<Transport> getTransports() {
-		return transports;
+	public Set<Vehicle> getVehicles() {
+		return vehicles;
 	}
 
 	/**
-	 * @param transports the transports to set
+	 * @param vehicles the vehicles to set
 	 */
-	public void setTransports(Set<Transport> transports) {
-		this.transports = transports;
+	public void setVehicles(Set<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
     
     

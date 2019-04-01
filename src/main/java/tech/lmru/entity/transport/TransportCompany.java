@@ -25,11 +25,11 @@ public class TransportCompany {
     @OneToMany
     @JoinTable
     (
-      name="transport_transport_company",
+      name="vehicle_transport_company",
       joinColumns={ @JoinColumn(name="transport_company_id", referencedColumnName="id") },
-      inverseJoinColumns={ @JoinColumn(name="transport_id", referencedColumnName="id") }
+      inverseJoinColumns={ @JoinColumn(name="vehicle_id", referencedColumnName="id") }
     )
-    private Set<Transport> transports = new HashSet<>(); 
+    private Set<Vehicle> vehicles = new HashSet<>();
 
 	/**
 	 * @return the id
@@ -74,17 +74,17 @@ public class TransportCompany {
 	}
 
 	/**
-	 * @return the transports
+	 * @return the vehicles
 	 */
-	public Set<Transport> getTransports() {
-		return transports;
+	public Set<Vehicle> getVehicles() {
+		return vehicles;
 	}
 
 	/**
-	 * @param transports the transports to set
+	 * @param vehicles the vehicles to set
 	 */
-	public void setTransports(Set<Transport> transports) {
-		this.transports = transports;
+	public void setVehicles(Set<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
 	
 	

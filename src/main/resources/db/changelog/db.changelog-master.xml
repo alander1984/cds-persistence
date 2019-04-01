@@ -13,4 +13,5 @@
     <include file="security/07_users_add_password.xml" relativeToChangelogFile="true"/>
     <include file="delivery/01_base_delivery_01.xml" relativeToChangelogFile="true"/>
     <include file="store/01_store.xml" relativeToChangelogFile="true"/>
+    <include file="transport/01_transport.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

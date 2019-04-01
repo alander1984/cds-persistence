@@ -1,0 +1,89 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+  <changeSet author="RomanSergienko" id="rserg_007">
+    <preConditions onFail="MARK_RAN">
+      <not>
+        <tableExists tableName="DRIVER"/>
+      </not>
+    </preConditions>
+
+    <createSequence sequenceName="driver_sequence" startValue="1" incrementBy="1"/>
+    <createSequence sequenceName="vehicle_sequence" startValue="1" incrementBy="1"/>
+    <createSequence sequenceName="transport_company_sequence" startValue="1" incrementBy="1"/>
+
+    <createTable remarks="Водители" tableName="DRIVER">
+      <column name="ID" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="surname" type="VARCHAR(64)"/>
+      <column name="name" type="VARCHAR(64)"/>
+      <column name="patronymic" type="VARCHAR(64)"/>
+      <column name="birthday" type="timestamp"/>
+      <column name="login" type="VARCHAR(64)"/>
+      <column name="password" type="VARCHAR(64)"/>
+    </createTable>
+    <addPrimaryKey columnNames="ID" constraintName="DRIVER_PK" tableName="DRIVER"/>
+
+    <createTable remarks="Транспортные компании" tableName="TRANSPORT_COMPANY">
+      <column name="ID" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="code" type="VARCHAR(64)"/>
+      <column name="name" type="VARCHAR(64)"/>
+    </createTable>
+    <addPrimaryKey columnNames="ID" constraintName="TRANSPORT_COMPANY_PK" tableName="TRANSPORT_COMPANY"/>
+
+    <createTable remarks="Транспорт" tableName="VEHICLE">
+      <column name="ID" type="BIGINT">
+        <constraints nullable="false"/>
+      </column>
+      <column name="registrationNumber" type="VARCHAR(64)"/>
+      <column name="model" type="VARCHAR(64)"/>
+      <column name="tonnage" type="VARCHAR(32)"/>
+      <column name="capacity" type="VARCHAR(32)"/>
+    </createTable>
+    <addPrimaryKey columnNames="ID" constraintName="VEHICLE_PK" tableName="VEHICLE"/>
+
+    <createTable remarks="Связь водителей с транспортом" tableName="DRIVER_VEHICLE">
+      <column name="DRIVER_ID" remarks="ИД водителя" type="BIGINT"/>
+      <column name="VEHICLE_ID" remarks="ИД транспорта" type="BIGINT"/>
+    </createTable>
+    <addPrimaryKey columnNames="DRIVER_ID,VEHICLE_ID" constraintName="PK_DRIVER_VEHICLE" tableName="DRIVER_VEHICLE"/>
+    <addForeignKeyConstraint baseColumnNames="DRIVER_ID"
+      baseTableName="DRIVER_VEHICLE"
+      constraintName="FK_DRIVER_VEHICLE_DRIVER_ID"
+      onDelete="CASCADE"
+      onUpdate="CASCADE"
+      referencedColumnNames="ID"
+      referencedTableName="DRIVER"/>
+    <addForeignKeyConstraint baseColumnNames="VEHICLE_ID"
+      baseTableName="DRIVER_VEHICLE"
+      constraintName="FK_DRIVER_VEHICLE_VEHICLE_ID"
+      onDelete="CASCADE"
+      onUpdate="CASCADE"
+      referencedColumnNames="ID"
+      referencedTableName="VEHICLE"/>
+
+
+    <createTable remarks="Связь транспорта с транспортной компанией" tableName="VEHICLE_TRANSPORT_COMPANY">
+      <column name="VEHICLE_ID" remarks="ИД транспорта" type="BIGINT"/>
+      <column name="TRANSPORT_COMPANY_ID" remarks="ИД транспортной компании" type="BIGINT"/>
+    </createTable>
+    <addPrimaryKey columnNames="VEHICLE_ID,TRANSPORT_COMPANY_ID" constraintName="PK_VEHICLE_TRANSPORT_COMPANY" tableName="VEHICLE_TRANSPORT_COMPANY"/>
+    <addForeignKeyConstraint baseColumnNames="VEHICLE_ID"
+      baseTableName="VEHICLE_TRANSPORT_COMPANY"
+      constraintName="FK_VEHICLE_TRANSPORT_COMPANY_VEHICLE_ID"
+      onDelete="CASCADE"
+      onUpdate="CASCADE"
+      referencedColumnNames="ID"
+      referencedTableName="VEHICLE"/>
+    <addForeignKeyConstraint baseColumnNames="TRANSPORT_COMPANY_ID"
+      baseTableName="VEHICLE_TRANSPORT_COMPANY"
+      constraintName="FK_VEHICLE_TRANSPORT_COMPANY_TRANSPORT_COMPANY_ID"
+      onDelete="CASCADE"
+      onUpdate="CASCADE"
+      referencedColumnNames="ID"
+      referencedTableName="TRANSPORT_COMPANY"/>
+
+  </changeSet>
+</databaseChangeLog>
