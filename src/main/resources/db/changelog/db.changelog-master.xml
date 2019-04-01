@@ -14,4 +14,6 @@
     <include file="delivery/01_base_delivery_01.xml" relativeToChangelogFile="true"/>
     <include file="store/01_store.xml" relativeToChangelogFile="true"/>
     <include file="transport/01_transport.xml" relativeToChangelogFile="true"/>
+    <include file="planning/01_planning.xml" relativeToChangelogFile="true"/>
+    <include file="route/02_routes.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

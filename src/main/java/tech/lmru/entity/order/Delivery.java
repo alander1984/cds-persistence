@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
+import tech.lmru.entity.store.Store;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -91,6 +91,11 @@ public class Delivery {
     
     @OneToMany(mappedBy="delivery")
     private Set<DeliveryItem> items = new HashSet<>();
+
+    @JoinColumn(name = "store_id", referencedColumnName = "id")
+    @ManyToOne
+    private Store store;
+
 
 	/**
 	 * @return the id
@@ -272,6 +277,90 @@ public class Delivery {
 	 */
 	public void setItems(Set<DeliveryItem> items) {
 		this.items = items;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	/**
+	 * @return the street
+	 */
+	public String getStreet() {
+		return street;
+	}
+
+	/**
+	 * @param street the street to set
+	 */
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	/**
+	 * @return the house
+	 */
+	public String getHouse() {
+		return house;
+	}
+
+	/**
+	 * @param house the house to set
+	 */
+	public void setHouse(String house) {
+		this.house = house;
+	}
+
+	/**
+	 * @return the entrance
+	 */
+	public String getEntrance() {
+		return entrance;
+	}
+
+	/**
+	 * @param entrance the entrance to set
+	 */
+	public void setEntrance(String entrance) {
+		this.entrance = entrance;
+	}
+
+	/**
+	 * @return the flat
+	 */
+	public String getFlat() {
+		return flat;
+	}
+
+	/**
+	 * @param flat the flat to set
+	 */
+	public void setFlat(String flat) {
+		this.flat = flat;
+	}
+
+	/**
+	 * @return the store
+	 */
+	public Store getStore() {
+		return store;
+	}
+
+	/**
+	 * @param store the store to set
+	 */
+	public void setStore(Store store) {
+		this.store = store;
 	}
 
     
