@@ -18,6 +18,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tech.lmru.entity.plan.OptimizationTask;
+import tech.lmru.entity.transport.Vehicle;
 
 @Entity
 @Table(name="ROUTES")
