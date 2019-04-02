@@ -41,10 +41,7 @@ public class Vehicle {
     
     @ManyToMany(mappedBy = "vehicles")
     private Set<Driver> drivers = new HashSet<>();
-    
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
+
 
 	/**
 	 * @return the id
@@ -129,21 +126,12 @@ public class Vehicle {
 	public void setDrivers(Set<Driver> drivers) {
 		this.drivers = drivers;
 	}
-
-	/**
-	 * @return the vehicle
-	 */
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	/**
-	 * @param vehicle the vehicle to set
-	 */
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-    
-    
-
+//
+//	public TransportCompany getTransportCompany() {
+//		return transportCompany;
+//	}
+//
+//	public void setTransportCompany(TransportCompany transportCompany) {
+//		this.transportCompany = transportCompany;
+//	}
 }
