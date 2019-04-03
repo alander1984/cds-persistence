@@ -22,7 +22,7 @@ public class TransportCompany {
     @Column(name = "name")
     private String name;
     
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinTable
     (
       name="vehicle_transport_company",
