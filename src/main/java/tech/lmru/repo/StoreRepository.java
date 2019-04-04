@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import tech.lmru.entity.store.Store;
 
 @Repository
-public interface StoreRepository extends JpaRepository<Store, Integer> {
+public interface StoreRepository extends JpaRepository<Store, Long> {
     
 }
