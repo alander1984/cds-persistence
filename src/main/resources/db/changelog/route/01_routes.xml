@@ -13,5 +13,6 @@
             <column name="CODE" remarks="Код" type="VARCHAR(32)"/>
         </createTable>
         <addPrimaryKey columnNames="ID" constraintName="ROUTES_PK" tableName="ROUTES"/>
+
     </changeSet>
 </databaseChangeLog>

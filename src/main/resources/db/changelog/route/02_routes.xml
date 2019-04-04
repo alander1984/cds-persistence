@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Alander" id="ala_add_correct_route_table">
+        <preConditions onFail="MARK_RAN">
+            <columnExists columnName="CODE" tableName="ROUTES"/>
+        </preConditions>
+        <dropColumn tableName="ROUTES" columnName="CODE"/>
+        <createSequence sequenceName="route_sequence" startValue="1" incrementBy="1"/>
+        <addColumn tableName="ROUTES">
+            <column name="DELIVERY_DATE" type="timestamp"/>
+            <column name="OPTIMIZATION_TASK_ID" type="BIGINT"/>
+            <column name="VEHICLE_ID" type="BIGINT"/>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="ROUTES"
+                                 constraintName="FK_ROUTE_VEHICLE"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="VEHICLE"/>
+        <createTable tableName="ROUTE_POINT">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route_id" type="BIGINT"/>
+            <column name="delivery_id" type="BIGINT"/>
+            <column name="arrival_time" type="NUMBER"/>
+            <column name="pos" type="INT"/>
+        </createTable>
+        <createSequence sequenceName="route_point_sequence" startValue="1" incrementBy="1"/>
+        <addPrimaryKey columnNames="ID" constraintName="ROUTE_POINT_PK" tableName="ROUTE_POINT"/>
+        <addForeignKeyConstraint baseColumnNames="delivery_id"
+                                 baseTableName="ROUTE_POINT"
+                                 constraintName="FK_ROUTE_POINT_ROUTE"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="ROUTES"/>
+    </changeSet>
+
+    
+</databaseChangeLog>

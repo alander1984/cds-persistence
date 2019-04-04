@@ -1,0 +1,64 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Alander" id="ala_add_initial_optimization_task">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="OPTIMIZATION_TASK"/></not>
+        </preConditions>
+        <createTable tableName="OPTIMIZATION_TASK">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_datetime" type="timestamp"/>            
+            <column name="start_datetime" type="timestamp"/>            
+            <column name="create_user_id" type="INT"/>            
+            <column name="status" type="VARCHAR(32)"/>            
+        </createTable>    
+        <createSequence sequenceName="optimization_task_sequence" startValue="1" incrementBy="1"/>
+        <addPrimaryKey columnNames="ID" constraintName="OPTIMIZATION_TASK_PK" tableName="OPTIMIZATION_TASK"/>
+        
+        <createTable tableName="task_delivery">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="task_id" type="bigint"/>
+            <column name="delivery_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="task_id"
+                                 baseTableName="task_delivery"
+                                 constraintName="fk_task_delivery_1"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="OPTIMIZATION_TASK"/>
+        <addForeignKeyConstraint baseColumnNames="delivery_id"
+                                 baseTableName="task_delivery"
+                                 constraintName="fk_task_delivery_2"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="DELIVERY"/>
+        
+        <createTable tableName="task_vehicle">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="task_id" type="bigint"/>
+            <column name="vehicle_id" type="bigint"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="task_id"
+                                 baseTableName="task_vehicle"
+                                 constraintName="fk_task_vehicle_1"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="OPTIMIZATION_TASK"/>
+        <addForeignKeyConstraint baseColumnNames="vehicle_id"
+                                 baseTableName="task_vehicle"
+                                 constraintName="fk_task_vehicle_2"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vehicle"/>        
+    </changeSet>
+   
+</databaseChangeLog>
