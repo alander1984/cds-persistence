@@ -16,9 +16,6 @@
     <include file="transport/01_transport.xml" relativeToChangelogFile="true"/>
     <include file="planning/01_planning.xml" relativeToChangelogFile="true"/>
     <include file="route/02_routes.xml" relativeToChangelogFile="true"/>
-<<<<<<< HEAD
     <include file="delivery/02_addColumns.xml" relativeToChangelogFile="true"/>
-=======
     <include file="transport/02_transport_change.xml" relativeToChangelogFile="true"/>
->>>>>>> 9a018643a7a008b51605db41a83fa82afff45b05
 </databaseChangeLog>
