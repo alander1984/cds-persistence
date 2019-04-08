@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import tech.lmru.entity.Permission;
 
-@Repository
 public interface PermissionRepository extends JpaRepository<Permission, Integer> {
     
 }
