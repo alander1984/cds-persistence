@@ -1,8 +1,8 @@
 /projects/cds-persistence/src/main/java/tech/lmru/entity/route/Route.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/plan/OptimizationTask.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/store/Store.java
-/projects/cds-persistence/src/main/java/tech/lmru/repo/UserRepository.java
 /projects/cds-persistence/src/main/java/tech/lmru/repo/DeliveryRepository.java
+/projects/cds-persistence/src/main/java/tech/lmru/repo/UserRepository.java
 /projects/cds-persistence/src/main/java/tech/lmru/repo/RoleRepository.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/transport/TransportCompany.java
 /projects/cds-persistence/src/main/java/tech/lmru/repo/PermissionRepository.java
@@ -16,6 +16,7 @@
 /projects/cds-persistence/src/main/java/tech/lmru/entity/transport/Vehicle.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/order/DeliveryItem.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/Permission.java
+/projects/cds-persistence/src/main/java/tech/lmru/repo/DeliveryItemRepository.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/Role.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/plan/OptimizationTaskStatusEnum.java
 /projects/cds-persistence/src/main/java/tech/lmru/entity/User.java

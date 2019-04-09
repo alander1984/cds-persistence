@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,7 +56,7 @@ public class Delivery {
     @ManyToOne
     private User lastUpdateUser;
     
-    @Column(name = "updated_date")
+    @Column(name = "update_date")
     @JsonFormat(pattern = "yyyy-mm-dd HH:MM:ss.SSS")
     private LocalDateTime lastUpdateDate;
 
@@ -89,7 +90,8 @@ public class Delivery {
     @Column(name="flat")
     private String flat;
     
-    @OneToMany(mappedBy="delivery")
+    
+    @OneToMany(mappedBy="delivery", fetch = FetchType.EAGER)
     private Set<DeliveryItem> items = new HashSet<>();
 
     @JoinColumn(name = "store_id", referencedColumnName = "id")

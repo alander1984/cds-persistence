@@ -48,18 +48,18 @@ public class DeliveryItem {
     @Column(name="quantity")
     private BigDecimal quantity;
     
-    @Column(name="loadedQuantity")
+    @Column(name="loaded_quantity")
     private BigDecimal loadedQuantity;
     
-    @Column(name="approvedQuantity")
+    @Column(name="approved_quantity")
     private BigDecimal approvedQuantity;
     
     @Column(name="status")
     @Enumerated(EnumType.STRING)
     private DeliveryStatusEnum status;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "delivery_id")
+    @ManyToOne (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "delivery_id",  referencedColumnName = "id")
     private Delivery delivery;    
 	/**
 	 * @return the id

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="STkachenko" id="st02_delivery_item_addcolumns">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="loaded_quantity" tableName="DELIVERY_ITEM"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="DELIVERY_ITEM">
+            <column name="loaded_quantity" type="NUMERIC"/>    
+            <column name="approved_quantity" type="NUMERIC"/>  
+        </addColumn>
+    </changeSet>
+    
+    <changeSet author="STkachenko" id="st03_delivery_item_removeColumns">
+        <preConditions onFail="MARK_RAN">
+                <columnExists columnName="loadedQuantity" tableName="DELIVERY_ITEM"/>
+        </preConditions>
+        <dropColumn tableName="DELIVERY_ITEM">
+            <column name="loadedQuantity" type="NUMERIC"/>    
+            <column name="approvedQuantity" type="NUMERIC"/>  
+        </dropColumn>
+    </changeSet>
+    
+    <changeSet author="STkachenko" id="st04_delivery_item_addcolumns_volume">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="volume" tableName="DELIVERY_ITEM"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="DELIVERY_ITEM">
+            <column name="volume" type="NUMERIC"/>      
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

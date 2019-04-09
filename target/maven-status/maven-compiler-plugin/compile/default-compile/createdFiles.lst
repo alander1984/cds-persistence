@@ -19,5 +19,6 @@ tech/lmru/entity/order/DeliveryStatusEnum.class
 tech/lmru/entity/store/Store.class
 tech/lmru/entity/transport/TransportCompany.class
 tech/lmru/entity/plan/OptimizationTaskStatusEnum.class
+tech/lmru/repo/DeliveryItemRepository.class
 tech/lmru/repo/StoreRepository.class
 tech/lmru/entity/order/DeliveryItem.class
