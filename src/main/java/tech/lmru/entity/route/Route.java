@@ -47,12 +47,12 @@ public class Route {
     @OneToOne(cascade={CascadeType.ALL})
     private OptimizationTask optimizationTask;
 
-    @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
-    @ManyToOne
+    @JoinColumn(name = "vehicle_id", referencedColumnName = "id", updatable = false)
+    @ManyToOne(cascade={CascadeType.MERGE})
     private Vehicle vehicle;
 
-    @ManyToOne
-    @JoinColumn(name = "transport_company_id", referencedColumnName = "id")
+    @ManyToOne(cascade={CascadeType.MERGE})
+    @JoinColumn(name = "transport_company_id", referencedColumnName = "id", updatable = false)
     private TransportCompany transportCompany;
 
 
