@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+  <changeSet author="RomanSergienko" id="rserg_add_columns_routes">
+    <preConditions onFail="MARK_RAN">
+      <columnExists columnName="vehicle_id" tableName="ROUTES"/>
+    </preConditions>
+    <addColumn tableName="ROUTES">
+      <column name="route_name"  type="VARCHAR(32)"/>
+      <column name="transport_company_id"  type="BIGINT"/>
+    </addColumn>
+    <addForeignKeyConstraint baseColumnNames="transport_company_id"
+      baseTableName="ROUTES"
+      constraintName="FK_ROUTE_TC"
+      onDelete="CASCADE"
+      onUpdate="CASCADE"
+      referencedColumnNames="ID"
+      referencedTableName="transport_company"/>
+  </changeSet>
+</databaseChangeLog>
