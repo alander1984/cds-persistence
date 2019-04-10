@@ -36,8 +36,8 @@ public class DeliveryItem {
     @Column(name="weight")
     private BigDecimal weight;
     
-    @Column(name="volume")
-    private BigDecimal volume;
+    @Column(name="height")
+    private BigDecimal height;
 
     @Column(name="width")
     private BigDecimal width;
@@ -120,15 +120,15 @@ public class DeliveryItem {
 	/**
 	 * @return the volume
 	 */
-	public BigDecimal getVolume() {
-		return volume;
+	public BigDecimal getHeight() {
+		return height;
 	}
 
 	/**
 	 * @param volume the volume to set
 	 */
-	public void setVolume(BigDecimal volume) {
-		this.volume = volume;
+	public void setHeight(BigDecimal height) {
+		this.height = height;
 	}
 
 	/**

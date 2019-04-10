@@ -19,4 +19,5 @@
     <include file="delivery/02_addColumns.xml" relativeToChangelogFile="true"/>
     <include file="transport/02_transport_change.xml" relativeToChangelogFile="true"/>
     <include file="delivery/03_addColumns.xml" relativeToChangelogFile="true"/>
+    <include file="delivery/04_renameColumn.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
