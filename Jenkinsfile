@@ -41,7 +41,7 @@ node ('internet-enabled') {
             stage ('Build Image') {
                 docker.image('docker.art.lmru.tech/maven:3.6.0-jdk-8-slim').inside() {
                     configFileProvider([configFile(fileId: 'settings-xml', targetLocation: './settings.xml')]) {
-                        mvn clean package -s settings.xml
+                        sh "mvn clean package -s settings.xml"
                     }
                 }
             }
