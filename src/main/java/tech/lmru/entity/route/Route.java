@@ -17,6 +17,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import tech.lmru.entity.plan.OptimizationTask;
+import tech.lmru.entity.store.Store;
 import tech.lmru.entity.transport.TransportCompany;
 import tech.lmru.entity.transport.Vehicle;
 
@@ -54,6 +55,10 @@ public class Route {
     @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name = "transport_company_id", referencedColumnName = "id", updatable = false)
     private TransportCompany transportCompany;
+
+    @ManyToOne(cascade={CascadeType.MERGE})
+    @JoinColumn(name = "store_id", referencedColumnName = "id", updatable = false)
+    private Store store;
 
 
 	/**
@@ -122,5 +127,13 @@ public class Route {
 
   public void setTransportCompany(TransportCompany transportCompany) {
     this.transportCompany = transportCompany;
+  }
+
+  public Store getStore() {
+    return store;
+  }
+
+  public void setStore(Store store) {
+    this.store = store;
   }
 }

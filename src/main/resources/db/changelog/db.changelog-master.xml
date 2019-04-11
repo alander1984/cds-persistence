@@ -22,4 +22,5 @@
     <include file="delivery/04_renameColumn.xml" relativeToChangelogFile="true"/>
     <include file="route/03_routes.xml" relativeToChangelogFile="true"/>
     <include file="planning/02_planning.xml" relativeToChangelogFile="true"/>
+    <include file="route/04_routes.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
