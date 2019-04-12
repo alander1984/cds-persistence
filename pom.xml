@@ -27,25 +27,26 @@
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
     <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>5.4.1.Final</version>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.4.1.Final</version>
     </dependency>
     <dependency>
-        <groupId>org.springframework.data</groupId>
-        <artifactId>spring-data-jpa</artifactId>
-        <version>2.1.4.RELEASE</version>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.1.4.RELEASE</version>
     </dependency>
     <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.9.8</version>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.8</version>
     </dependency>
 
   </dependencies>
 
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
+      <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
@@ -87,41 +88,53 @@
           <version>3.0.0</version>
         </plugin>
         <plugin>
-		  <groupId>org.liquibase</groupId>
-		  <artifactId>liquibase-maven-plugin</artifactId>
-		  <version>3.6.3</version>
-		  <dependencies>
-		  	<dependency>
-			     <groupId>org.postgresql</groupId>
-			     <artifactId>postgresql</artifactId>
-			     <version>42.2.5</version>
-		     </dependency>
-		  </dependencies>
-				<configuration>
-				    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
-					<changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
-					<driver>org.postgresql.Driver</driver>
-					<url>jdbc:postgresql://${dbhost}:${dbport}/${dbname}</url>
-					<defaultSchemaName />
-					<username>${dbusername}</username>
-					<password>${dbpassword}</password>
-					<verbose>true</verbose>
-					<logging>debug</logging>
-				</configuration>
-			</plugin>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-maven-plugin</artifactId>
+          <version>3.6.3</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.postgresql</groupId>
+              <artifactId>postgresql</artifactId>
+              <version>42.2.5</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+            <changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</changeLogFile>
+            <driver>org.postgresql.Driver</driver>
+            <url>jdbc:postgresql://${dbhost}:${dbport}/${dbname}</url>
+            <defaultSchemaName />
+            <username>${dbusername}</username>
+            <password>${dbpassword}</password>
+            <verbose>true</verbose>
+            <logging>debug</logging>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
   <profiles>
     <profile>
-        <id>testing</id>
-        <properties>
-            <dbhost>not set</dbhost>
-            <dbport>not set</dbport>
-            <dbname>not set</dbname>
-            <dbusername>not set</dbusername>
-            <dbpassword>not set</dbpassword>
-        </properties>
+      <id>testing</id>
+      <properties>
+        <dbhost>not set</dbhost>
+        <dbport>not set</dbport>
+        <dbname>not set</dbname>
+        <dbusername>not set</dbusername>
+        <dbpassword>not set</dbpassword>
+      </properties>
     </profile>
   </profiles>
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <name>releases</name>
+      <url>https://art.lmru.tech/mvn-local-release-customer-delivery-system</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>napshots</name>
+      <url>https://art.lmru.tech/mvn-local-snapshots-customer-delivery-system</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
