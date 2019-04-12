@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import tech.lmru.entity.plan.OptimizationTask;
 import tech.lmru.entity.store.Store;
+import tech.lmru.entity.transport.Driver;
 import tech.lmru.entity.transport.TransportCompany;
 import tech.lmru.entity.transport.Vehicle;
 
@@ -59,6 +60,10 @@ public class Route {
     @ManyToOne(cascade={CascadeType.MERGE})
     @JoinColumn(name = "store_id", referencedColumnName = "id", updatable = false)
     private Store store;
+
+    @ManyToOne(cascade={CascadeType.MERGE})
+    @JoinColumn(name = "driver_id", referencedColumnName = "id", updatable = false)
+    private Driver driver;
 
 
 	/**
@@ -135,5 +140,14 @@ public class Route {
 
   public void setStore(Store store) {
     this.store = store;
+  }
+
+
+  public Driver getDriver() {
+    return driver;
+  }
+
+  public void setDriver(Driver driver) {
+    this.driver = driver;
   }
 }
