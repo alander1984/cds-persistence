@@ -24,4 +24,5 @@
     <include file="planning/02_planning.xml" relativeToChangelogFile="true"/>
     <include file="route/04_routes.xml" relativeToChangelogFile="true"/>
     <include file="route/05_routes.xml" relativeToChangelogFile="true"/>
+    <include file="route/06_routes.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

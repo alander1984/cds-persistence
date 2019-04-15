@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+  <changeSet author="YKorzhev" id="delete_and_create_fk_on_delivery_for_route_point">
+    <preConditions onFail="MARK_RAN">           
+        <foreignKeyConstraintExists foreignKeyName="FK_ROUTE_POINT_ROUTE" /> 
+        <tableExists tableName="ROUTE_POINT"/>
+        <tableExists tableName="DELIVERY"/>
+        <columnExists columnName="ID" tableName="DELIVERY" />
+        <columnExists columnName="delivery_id" tableName="ROUTE_POINT" />
+    </preConditions>
+    <dropForeignKeyConstraint baseTableName="ROUTE_POINT" constraintName="FK_ROUTE_POINT_ROUTE"/>
+    
+    <addForeignKeyConstraint baseColumnNames="delivery_id"
+                                 baseTableName="ROUTE_POINT"
+                                 constraintName="FK_ROUTE_POINT_DELIVERY"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="DELIVERY"/>
+  </changeSet>
+</databaseChangeLog>
