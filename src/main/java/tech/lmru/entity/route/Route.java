@@ -38,7 +38,7 @@ public class Route {
 	  @Column(name="route_name")
 	  private String name;
 
-    @OneToMany(mappedBy="delivery", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="route", fetch = FetchType.EAGER)
     @OrderBy("pos")
     public List<RoutePoint> routerPoints;
 

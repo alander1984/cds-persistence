@@ -28,6 +28,10 @@ public class RoutePoint {
     @OneToOne(cascade={CascadeType.ALL})
     private Delivery delivery;
     
+    @JoinColumn(name = "route_id", referencedColumnName="id")
+    @ManyToOne(cascade={CascadeType.ALL})
+    private Route route;
+    
     @Column(name = "arrival_time")
     private BigDecimal arrivalTime;
 
@@ -89,6 +93,16 @@ public class RoutePoint {
 	public void setPos(int pos) {
 		this.pos = pos;
 	}
+	
+	public void setRoute(Route route) {
+	    this.route = route;
+	}
+	
+	public Route getRoute() {
+	    return route;
+	}
+	
+	
     
     
    
