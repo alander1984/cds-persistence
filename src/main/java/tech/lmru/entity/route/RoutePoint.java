@@ -1,14 +1,15 @@
 package tech.lmru.entity.route;
 
 import java.math.BigDecimal;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-
+import javax.persistence.Table;
 import tech.lmru.entity.order.Delivery;
 
 @Entity
@@ -24,10 +25,10 @@ public class RoutePoint {
             allocationSize = 1)
     private long id;
    
-    @JoinColumn(name = "delivery_id", referencedColumnName = "id")
-    @OneToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name = "delivery_id", referencedColumnName = "id", updatable = false)
+    @OneToOne
     private Delivery delivery;
-    
+
     @Column(name = "arrival_time")
     private BigDecimal arrivalTime;
 
@@ -89,7 +90,6 @@ public class RoutePoint {
 	public void setPos(int pos) {
 		this.pos = pos;
 	}
-    
-    
+
    
 }

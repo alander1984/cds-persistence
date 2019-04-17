@@ -38,7 +38,8 @@ public class Route {
 	  @Column(name="route_name")
 	  private String name;
 
-    @OneToMany(mappedBy="delivery", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.MERGE})
+    @JoinColumn(name = "route_id")
     @OrderBy("pos")
     public List<RoutePoint> routerPoints;
 
