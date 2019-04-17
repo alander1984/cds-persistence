@@ -96,7 +96,6 @@ public class DeliveryZoneCoordinate {
                 "id=" + id +
                 ", lat=" + lat +
                 ", lon=" + lon +
-                ", deliveryZone=" + deliveryZone +
                 '}';
     }
 }

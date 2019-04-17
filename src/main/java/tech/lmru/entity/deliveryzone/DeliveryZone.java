@@ -22,7 +22,7 @@ public class DeliveryZone {
             allocationSize = 1)
     private long id;
 
-    @OneToMany(mappedBy="deliveryZone")
+    @OneToMany(mappedBy = "deliveryZone", fetch = FetchType.EAGER)
     private List<DeliveryZoneCoordinate> coordinateList;
 
     public long getId() {
