@@ -17,6 +17,10 @@ public class DeliveryZoneCoordinate {
         this.deliveryZone = deliveryZone;
     }
 
+    public DeliveryZoneCoordinate(double lon, double lat, DeliveryZone deliveryZone) {
+        this(new BigDecimal(lon), new BigDecimal(lat), deliveryZone);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_zone_coordinates_seq")
     @SequenceGenerator(
@@ -32,7 +36,7 @@ public class DeliveryZoneCoordinate {
     private BigDecimal lon;
 
     @ManyToOne
-    @JoinColumn(name = "delivery_zone_id", referencedColumnName = "id")
+    @JoinColumn(name="delivery_zone_id")
     private DeliveryZone deliveryZone;
 
     public long getId() {
@@ -74,13 +78,16 @@ public class DeliveryZoneCoordinate {
         DeliveryZoneCoordinate that = (DeliveryZoneCoordinate) o;
         return id == that.id &&
                 lat.equals(that.lat) &&
-                lon.equals(that.lon) &&
-                deliveryZone.equals(that.deliveryZone);
+                lon.equals(that.lon)
+                &&                deliveryZone.equals(that.deliveryZone)
+                ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, lat, lon, deliveryZone);
+        return Objects.hash(id, lat, lon
+                ,deliveryZone
+        );
     }
 
     @Override

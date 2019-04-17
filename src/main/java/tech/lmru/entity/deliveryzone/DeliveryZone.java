@@ -7,6 +7,13 @@ import java.util.Objects;
 @Entity
 @Table(name = "DELIVERY_ZONES")
 public class DeliveryZone {
+    public DeliveryZone() {
+    }
+
+    public DeliveryZone(List<DeliveryZoneCoordinate> coordinateList) {
+        this.coordinateList = coordinateList;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_zones_seq")
     @SequenceGenerator(
@@ -15,7 +22,7 @@ public class DeliveryZone {
             allocationSize = 1)
     private long id;
 
-    @OneToMany(mappedBy = "deliveryZone", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="deliveryZone")
     private List<DeliveryZoneCoordinate> coordinateList;
 
     public long getId() {
@@ -30,9 +37,9 @@ public class DeliveryZone {
         return coordinateList;
     }
 
-//    public void setCoordinateList(List<DeliveryZoneCoordinate> coordinateList) {
-//        this.coordinateList = coordinateList;
-//    }
+    public void setCoordinateList(List<DeliveryZoneCoordinate> coordinateList) {
+        this.coordinateList = coordinateList;
+    }
 
     @Override
     public boolean equals(Object o) {
