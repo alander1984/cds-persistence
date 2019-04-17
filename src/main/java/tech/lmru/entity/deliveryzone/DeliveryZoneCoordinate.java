@@ -7,6 +7,16 @@ import java.util.Objects;
 @Entity
 @Table(name = "DELIVERY_ZONE_COORDINATES")
 public class DeliveryZoneCoordinate {
+
+    public DeliveryZoneCoordinate() {
+    }
+
+    public DeliveryZoneCoordinate(BigDecimal lon, BigDecimal lat, DeliveryZone deliveryZone) {
+        this.lon = lon;
+        this.lat = lat;
+        this.deliveryZone = deliveryZone;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "delivery_zone_coordinates_seq")
     @SequenceGenerator(
