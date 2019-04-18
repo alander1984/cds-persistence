@@ -27,7 +27,7 @@
     <include file="route/06_routes.xml" relativeToChangelogFile="true"/>
     <include file="delivery/05_change_type_lon_lat.xml" relativeToChangelogFile="true"/>
     <include file="route/07_routes.xml" relativeToChangelogFile="true"/>
-
+    <include file="delivery/06_addColumns.xml" relativeToChangelogFile="true"/>
     <include file="deliveryzone/01_base_delivery_zones_01.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
