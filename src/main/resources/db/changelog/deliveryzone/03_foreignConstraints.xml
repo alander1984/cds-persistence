@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="sadrutdin" id="02_delivery_zone_add_col">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <columnExists columnName="pos" tableName="DELIVERY_ZONE_COORDINATES"/>
+                <columnExists columnName="transport_company_id" tableName="DELIVERY_ZONES"/>
+                <columnExists columnName="store_id" tableName="DELIVERY_ZONES"/>
+                <not>
+                    <foreignKeyConstraintExists foreignKeyName="FK_STORE"/>
+                    <foreignKeyConstraintExists foreignKeyName="FK_TRANSPORT_COMPANY"/>
+                </not>
+            </and>
+        </preConditions>
+
+
+        <addForeignKeyConstraint baseColumnNames="store_id"
+                                 baseTableName="DELIVERY_ZONES"
+                                 constraintName="FK_STORE"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="STORE"/>
+
+        <addForeignKeyConstraint baseColumnNames="transport_company_id"
+                                 baseTableName="DELIVERY_ZONES"
+                                 constraintName="FK_TRANSPORT_COMPANY"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="ID"
+                                 referencedTableName="TRANSPORT_COMPANY"/>
+
+    </changeSet>
+</databaseChangeLog>
