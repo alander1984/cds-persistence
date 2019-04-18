@@ -11,14 +11,14 @@ public class DeliveryZoneCoordinate {
     public DeliveryZoneCoordinate() {
     }
 
-    public DeliveryZoneCoordinate(BigDecimal lon, BigDecimal lat, DeliveryZone deliveryZone) {
-        this.lon = lon;
+    public DeliveryZoneCoordinate(BigDecimal lat, BigDecimal lon, DeliveryZone deliveryZone) {
         this.lat = lat;
+        this.lon = lon;
         this.deliveryZone = deliveryZone;
     }
 
-    public DeliveryZoneCoordinate(double lon, double lat, DeliveryZone deliveryZone) {
-        this(new BigDecimal(lon), new BigDecimal(lat), deliveryZone);
+    public DeliveryZoneCoordinate(double lat, double lon, DeliveryZone deliveryZone) {
+        this(new BigDecimal(lat), new BigDecimal(lon), deliveryZone);
     }
 
     @Id
