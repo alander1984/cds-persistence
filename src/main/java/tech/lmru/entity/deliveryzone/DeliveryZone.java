@@ -1,6 +1,10 @@
 package tech.lmru.entity.deliveryzone;
 
+import tech.lmru.entity.store.Store;
+import tech.lmru.entity.transport.TransportCompany;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,8 +14,9 @@ public class DeliveryZone {
     public DeliveryZone() {
     }
 
-    public DeliveryZone(List<DeliveryZoneCoordinate> coordinateList) {
-        this.coordinateList = coordinateList;
+    public void addCoordinate(DeliveryZoneCoordinate coordinate){
+        this.coordinateList.add(coordinate);
+        coordinate.setDeliveryZone(this);
     }
 
     @Id
@@ -22,8 +27,16 @@ public class DeliveryZone {
             allocationSize = 1)
     private long id;
 
-    @OneToMany(mappedBy = "deliveryZone", fetch = FetchType.EAGER)
-    private List<DeliveryZoneCoordinate> coordinateList;
+    @OneToMany(mappedBy = "deliveryZone", cascade = CascadeType.ALL)
+    private List<DeliveryZoneCoordinate> coordinateList = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", referencedColumnName = "id")
+    private Store ownStore;
+
+    @ManyToOne
+    @JoinColumn(name = "transport_company_id", referencedColumnName = "id")
+    private TransportCompany ownTransportCompany;
 
     public long getId() {
         return id;
@@ -37,8 +50,20 @@ public class DeliveryZone {
         return coordinateList;
     }
 
-    public void setCoordinateList(List<DeliveryZoneCoordinate> coordinateList) {
-        this.coordinateList = coordinateList;
+    public Store getOwnStore() {
+        return ownStore;
+    }
+
+    public void setOwnStore(Store ownStore) {
+        this.ownStore = ownStore;
+    }
+
+    public TransportCompany getOwnTransportCompany() {
+        return ownTransportCompany;
+    }
+
+    public void setOwnTransportCompany(TransportCompany ownTransportCompany) {
+        this.ownTransportCompany = ownTransportCompany;
     }
 
     @Override
@@ -47,17 +72,18 @@ public class DeliveryZone {
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryZone that = (DeliveryZone) o;
         return id == that.id &&
-                Objects.equals(coordinateList, that.coordinateList);
+                Objects.equals(coordinateList, that.coordinateList) &&
+                Objects.equals(ownStore, that.ownStore) &&
+                Objects.equals(ownTransportCompany, that.ownTransportCompany);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, coordinateList);
+        return Objects.hash(id, coordinateList, ownStore, ownTransportCompany);
     }
 
     @Override
     public String toString() {
-        return "DeliveryZone{id=" + id + ", coordinateList=" + coordinateList
-                + '}';
+        return "DeliveryZone{" + "id=" + id + ", coordinateList=" + coordinateList + ", ownStore=" + ownStore + ", ownTransportCompany=" + ownTransportCompany + '}';
     }
 }

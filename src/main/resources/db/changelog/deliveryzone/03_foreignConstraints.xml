@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="sadrutdin" id="03_foreign_constraints">
+        <preConditions onFail="MARK_RAN">
+            <columnExists columnName="pos" tableName="DELIVERY_ZONE_COORDINATES"/>
+            <columnExists columnName="transport_company_id" tableName="DELIVERY_ZONES"/>
+            <columnExists columnName="store_id" tableName="DELIVERY_ZONES"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="delivery_zones_store_id_fk"/>
+                <foreignKeyConstraintExists foreignKeyName="delivery_zones_transport_company_id_fk"/>
+            </not>
+        </preConditions>
+
+
+        <addForeignKeyConstraint baseColumnNames="store_id"
+                                 baseTableName="delivery_zones"
+                                 constraintName="STORE_PK"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="store"/>
+
+        <addForeignKeyConstraint baseColumnNames="transport_company_id"
+                                 baseTableName="delivery_zones"
+                                 constraintName="delivery_zones_transport_company_id_fk"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transport_company"/>
+
+    </changeSet>
+</databaseChangeLog>

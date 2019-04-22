@@ -11,14 +11,14 @@ public class DeliveryZoneCoordinate {
     public DeliveryZoneCoordinate() {
     }
 
-    public DeliveryZoneCoordinate(BigDecimal lat, BigDecimal lon, DeliveryZone deliveryZone) {
-        this.lat = lat;
+    public DeliveryZoneCoordinate(BigDecimal lon, BigDecimal lat, int pos) {
         this.lon = lon;
-        this.deliveryZone = deliveryZone;
+        this.lat = lat;
+        this.pos = pos;
     }
 
-    public DeliveryZoneCoordinate(double lat, double lon, DeliveryZone deliveryZone) {
-        this(new BigDecimal(lat), new BigDecimal(lon), deliveryZone);
+    public DeliveryZoneCoordinate(double lon, double lat, int pos) {
+        this(new BigDecimal(lon), new BigDecimal(lat), pos);
     }
 
     @Id
@@ -35,8 +35,11 @@ public class DeliveryZoneCoordinate {
     @Column(name = "lon")
     private BigDecimal lon;
 
-    @ManyToOne
-    @JoinColumn(name="delivery_zone_id")
+    @Column(name = "pos")
+    private int pos;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "delivery_zone_id")
     private DeliveryZone deliveryZone;
 
     public long getId() {
@@ -76,26 +79,18 @@ public class DeliveryZoneCoordinate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DeliveryZoneCoordinate that = (DeliveryZoneCoordinate) o;
-        return id == that.id &&
-                lat.equals(that.lat) &&
-                lon.equals(that.lon)
-                &&                deliveryZone.equals(that.deliveryZone)
-                ;
+        return lat.equals(that.lat) &&
+                lon.equals(that.lon) &&
+                pos == that.pos;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, lat, lon
-                ,deliveryZone
-        );
+        return Objects.hash(id, lat, lon, pos);
     }
 
     @Override
     public String toString() {
-        return "DeliveryZoneCoordinate{" +
-                "id=" + id +
-                ", lat=" + lat +
-                ", lon=" + lon +
-                '}';
+        return "DeliveryZoneCoordinate{" + "id=" + id + ", lat=" + lat + ", lon=" + lon + '}';
     }
 }
