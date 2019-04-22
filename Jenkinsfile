@@ -45,13 +45,7 @@ node ('internet-enabled') {
                     }
                 }
             }
-            stage ('Push to kubernets') {
-                docker.image('bitnami/kubectl').inside() {
-                    configFileProvider([configFile(fileId: 'kubernets-config', targetLocation: '~/.kube/config')]) {
-                        sh "kubectl cluster-info"
-                    }
-                }
-            }
+
             stage ('Wipe') {
                 cleanWs();
             }
