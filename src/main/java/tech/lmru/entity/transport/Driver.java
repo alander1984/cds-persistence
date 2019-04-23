@@ -35,7 +35,8 @@ public class Driver {
     @Column(name = "password")
     private String password;
     
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    //@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "DRIVER_VEHICLE",
         joinColumns = @JoinColumn(name = "driver_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"))

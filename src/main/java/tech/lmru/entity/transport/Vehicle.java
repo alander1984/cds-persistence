@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "VEHICLE")
@@ -35,9 +36,12 @@ public class Vehicle {
     @Column(name = "capacity")
     private String capacity;
     
-    @ManyToMany(mappedBy = "vehicles", fetch = FetchType.EAGER)
+    //@ManyToMany(mappedBy = "vehicles", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "DRIVER_VEHICLE",
+        joinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "driver_id", referencedColumnName = "id"))
     private Set<Driver> drivers = new HashSet<>();
-
 
 	/**
 	 * @return the id
