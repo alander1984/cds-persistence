@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="NS" id="ns_add_route_track_table">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ROUTE_TRACK"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ROUTE_TRACK">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route_id" type="BIGINT"/>
+            <column name="timestamp" type="BIGINT"/>
+            <column name="lat" type="numeric"/>
+            <column name="lon" type="numeric"/>
+        </createTable>
+        <createSequence sequenceName="route_track_sequence" startValue="1" incrementBy="1"/>
+        <addPrimaryKey columnNames="ID" constraintName="ROUTE_TRACK_PK" tableName="ROUTE_TRACK"/>
+    </changeSet>
+
+    
+</databaseChangeLog>
