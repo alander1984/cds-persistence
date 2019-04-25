@@ -1,8 +1,8 @@
 package tech.lmru.entity.route;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +17,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import tech.lmru.entity.plan.OptimizationTask;
 import tech.lmru.entity.store.Store;
 import tech.lmru.entity.transport.Driver;
@@ -67,6 +70,10 @@ public class Route {
     @JoinColumn(name = "driver_id", referencedColumnName = "id", updatable = false)
     private Driver driver;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.MERGE})
+    @JoinColumn(name = "route_id")
+    @OrderBy("timestamp")
+    public List<RouteTrack> routeTracks;
 
 	/**
 	 * @return the id
@@ -152,4 +159,18 @@ public class Route {
   public void setDriver(Driver driver) {
     this.driver = driver;
   }
+
+    /**
+     * @return the routeTracks
+     */
+    public List<RouteTrack> getRouteTracks() {
+    	return routeTracks;
+    }
+    
+    /**
+     * @param routeTracks the routeTracks to set
+     */
+    public void setRouteTracks(List<RouteTrack> routeTracks) {
+    	this.routeTracks = routeTracks;
+    }
 }
