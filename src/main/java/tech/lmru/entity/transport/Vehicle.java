@@ -42,6 +42,12 @@ public class Vehicle {
         joinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "driver_id", referencedColumnName = "id"))
     private Set<Driver> drivers = new HashSet<>();
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "VEHICLE_TRANSPORT_COMPANY",
+        joinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "transport_company_id", referencedColumnName = "id"))
+    private Set<TransportCompany> transportCompanies = new HashSet<>();
 
 	/**
 	 * @return the id
@@ -126,12 +132,12 @@ public class Vehicle {
 	public void setDrivers(Set<Driver> drivers) {
 		this.drivers = drivers;
 	}
-//
-//	public TransportCompany getTransportCompany() {
-//		return transportCompany;
-//	}
-//
-//	public void setTransportCompany(TransportCompany transportCompany) {
-//		this.transportCompany = transportCompany;
-//	}
+
+	public Set<TransportCompany> getTransportCompanies() {
+		return transportCompanies;
+	}
+
+	public void setTransportCompanies(Set<TransportCompany> transportCompanies) {
+		this.transportCompanies = transportCompanies;
+	}
 }

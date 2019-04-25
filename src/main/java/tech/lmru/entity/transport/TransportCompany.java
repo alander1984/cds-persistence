@@ -22,13 +22,16 @@ public class TransportCompany {
     @Column(name = "name")
     private String name;
     
-    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinTable
-    (
-      name="vehicle_transport_company",
-      joinColumns={ @JoinColumn(name="transport_company_id", referencedColumnName="id") },
-      inverseJoinColumns={ @JoinColumn(name="vehicle_id", referencedColumnName="id") }
-    )
+    @ManyToMany(fetch = FetchType.EAGER)
+    //@JoinTable
+    //(
+    //  name="vehicle_transport_company",
+    //  joinColumns=(@JoinColumn(name="transport_company_id", referencedColumnName="id")),
+    //  inverseJoinColumns=(@JoinColumn(name="vehicle_id", referencedColumnName="id"))
+   // )
+    @JoinTable(name = "VEHICLE_TRANSPORT_COMPANY",
+        joinColumns = @JoinColumn(name = "transport_company_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "vehicle_id", referencedColumnName = "id"))
     private Set<Vehicle> vehicles = new HashSet<>();
 
 	/**
